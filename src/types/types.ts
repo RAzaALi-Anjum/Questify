@@ -1,0 +1,78 @@
+import { deepseek } from "@ai-sdk/deepseek";
+import { google } from "@ai-sdk/google";
+import { openai } from "@ai-sdk/openai";
+import { DeepPartial, LanguageModelV1 } from "ai";
+import { z } from "zod";
+
+export const QuestionSchema = z.object({
+    questions: z.array(
+        z.object({
+            question: z.string(),
+            type: z.enum(["multiple-choice", "true-false", "short-answer"]),
+            options: z.array(z.string().min(1)).optional(),
+            correctAnswer: z.union([
+                z.array(z.number()),  
+                z.string(),          
+                z.boolean()          
+            ]),
+            correctAnswersCount: z.number().optional(),  
+            hint: z.string().optional(),
+            why: z.string(),
+            page: z.number().optional(), 
+        })
+    ),
+});
+
+export interface Question {
+    question?: string;
+    type?: "multiple-choice" | "true-false" | "short-answer";
+    options?: string[];
+    correctAnswer?: number[] | string | boolean;
+    correctAnswersCount?: number; 
+    hint?: string;
+    why?: string;
+    page?: number;
+};
+
+export type GenerateQuestionsParams = {
+    input: string;
+    fileContent: string;
+    questionType: "multiple-choice" | "true-false" | "short-answer" | "mixed";
+    questionCount: number;
+    optionsCount: number;
+    systemPrompt?: string;
+    correctAnswersCount: number;
+    isRandomCorrectAnswers?: boolean;
+    minCorrectAnswers?: number;
+    maxCorrectAnswers?: number;
+    model: Model;
+    output?:
+        | (
+              | DeepPartial<{
+                    correctAnswersCount: number;
+                    type: "multiple-choice" | "true-false" | "short-answer";
+                    options: string[];
+                    question: string;
+                    correctAnswer: string | boolean | number[];
+                    why: string;
+                    hint?: string | undefined;
+                    page?: number | undefined;
+                }>
+              | undefined
+          )[]
+        | undefined;
+};
+
+export type Model = "deepseek-chat" | "gpt-4o-mini" | "gemini-2.0-flash";
+
+export const ModelToLanguageModel: Record<Model, LanguageModelV1> = {
+    "deepseek-chat": deepseek("deepseek-chat", {
+        apiKey: process.env.DEEPSEEK_API_KEY,
+    }),
+    "gpt-4o-mini": openai("gpt-4o-mini", {
+        apiKey: process.env.OPENAI_API_KEY,
+    }),
+    "gemini-2.0-flash": google("gemini-2.0-flash", {
+        apiKey: process.env.GOOGLE_API_KEY,
+    }),
+}

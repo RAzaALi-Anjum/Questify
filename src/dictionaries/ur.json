@@ -1,0 +1,37 @@
+{
+  "app_title": "کویسٹیفائی",
+  "app_subtitle": "کسی بھی متن سے کوئز سوالات بنائیں، AI کے ذریعے۔",
+  "generate_questions_button": "سوالات بنائیں",
+  "your_content_title": "آپ کا مواد",
+  "tab_content": "مواد",
+  "tab_quiz_settings": "کوئز سیٹنگز",
+  "question_type_label": "سوال کی قسم",
+  "number_of_questions_label": "سوالات کی تعداد",
+  "q_type_mixed": "مخلوط",
+  "q_type_multiple_choice": "کثیر الانتخاب",
+  "q_type_true_false": "درست/غلط",
+  "q_type_short_answer": "مختصر جواب",
+  "select_question_type_placeholder": "سوال کی قسم منتخب کریں",
+  "fileUpload": {
+    "title": "فائل اپ لوڈ کریں (PDF یا Text)",
+    "changeFile": "فائل تبدیل کریں",
+    "clickToUpload": "کلک کریں یا گھسیٹیں",
+    "dragAndDrop": "یا گھسیٹ کر چھوڑیں",
+    "fileTypes": "PDF، TXT یا MD فائلیں",
+    "processing": "فائل پروسیس ہو رہی ہے...",
+    "readErrorFallback": "فائل پڑھنے میں ناکامی"
+  },
+  "export_pdf": "PDF ایکسپورٹ کریں",
+  "export_markdown": "مارک ڈاؤن ایکسپورٹ کریں",
+  "export_button": "ایکسپورٹ",
+  "languageSwitcher": {
+    "label": "زبان",
+    "placeholder": "زبان منتخب کریں",
+    "selectLanguage": "زبان منتخب کریں"
+  },
+  "seo": {
+    "title": "کویسٹیفائی - AI کے ذریعے کوئز بنائیں",
+    "description": "AI کے ذریعے متن یا PDF سے کثیر الانتخاب، مختصر جواب یا درست/غلط کوئز بنائیں",
+    "keywords": "quiz generator, ai quiz, pdf to quiz, text to quiz, exam generator, multiple choice, short answer, true false"
+  }
+} 
