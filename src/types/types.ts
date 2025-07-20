@@ -63,16 +63,10 @@ export type GenerateQuestionsParams = {
         | undefined;
 };
 
-export type Model = "deepseek-chat" | "gpt-4o-mini" | "gemini-2.0-flash";
+export type Model = "deepseek-chat";
 
 export const ModelToLanguageModel: Record<Model, LanguageModelV1> = {
     "deepseek-chat": deepseek("deepseek-chat", {
         apiKey: process.env.DEEPSEEK_API_KEY,
     } as any),
-    "gpt-4o-mini": openai("gpt-4o-mini", {
-        apiKey: process.env.OPENAI_API_KEY,
-    }),
-    "gemini-2.0-flash": google("gemini-2.0-flash", {
-        apiKey: process.env.GOOGLE_API_KEY,
-    }),
 }

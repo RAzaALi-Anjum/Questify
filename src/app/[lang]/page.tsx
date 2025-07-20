@@ -104,8 +104,7 @@ function QuizContent({ setUsageRefresh }: { setUsageRefresh: (fn: (r: number) =>
   const [input, setInput] = useState("");
   const [fileContent, setFileContent] = useState("");
   const [questionType, setQuestionType] = useState<"multiple-choice" | "true-false" | "short-answer" | "mixed">("mixed");
-  // Remove model selection state and always use DeepSeek
-  // const [selectedModel, setSelectedModel] = useState<Model>("gemini-2.0-flash");
+  // Model selection removed; always use DeepSeek
   const selectedModel: Model = "deepseek-chat";
   const [questionCount, setQuestionCount] = useState(5);
   const [maxQuestions, setMaxQuestions] = useState(20);
