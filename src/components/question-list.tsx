@@ -932,7 +932,7 @@ export function QuestionList({
                             {showResults && (
                                 <div className="mt-4">
                                     {/* Multiple-choice/True-false feedback */}
-                                    {['multiple-choice', 'true-false'].includes(question.type) && (
+                                    {['multiple-choice', 'true-false'].includes(question.type ?? '') && (
                                         <div
                                             className={`rounded-lg p-4 border text-base font-bold mt-2 ${answerResults[actualIndex]
     ? 'border-green-400 bg-green-50 dark:border-green-700 dark:bg-green-900/20 text-green-700 dark:text-green-200'
