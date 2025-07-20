@@ -606,9 +606,6 @@ function QuizContent({ setUsageRefresh }: { setUsageRefresh: (fn: (r: number) =>
                                   <RateLimitError
                                       error={error}
                                       session={null} // Removed session prop
-                                      handlePurchaseCredits={
-                                          null // Removed handlePurchaseCredits prop
-                                      }
                                       isCheckoutLoading={false} // Removed isCheckoutLoading prop
                                       priceString={null} // Removed priceString prop
                                       dictionary={dictionary}
