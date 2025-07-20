@@ -12,7 +12,6 @@ import LanguageSwitcher from "@/components/language-switcher";
 import { Locale } from "@/i18n.config";
 import { getDictionary } from "./dictionaries";
 import UserUsageWrapper from '@/components/UserUsageWrapper';
-import { i18n, Locale } from '@/i18n.config';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
