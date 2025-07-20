@@ -32,7 +32,7 @@ import { LoadingState } from "@/components/loading-state";
 import { ModeToggle } from "@/components/ModeToggle";
 import { NumberSelector } from "@/components/number-selector";
 import { QuestionList } from "@/components/question-list";
-import { RateLimitError } from "@/components/rate-limit-error";
+import RateLimitError from "@/components/rate-limit-error";
 import { ShareQuiz } from "@/components/share-quiz";
 import { Submit } from "@/components/submit";
 import { ThemedCard } from "@/components/themed-card";
