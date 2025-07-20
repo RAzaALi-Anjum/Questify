@@ -37,8 +37,6 @@
     "app_subtitle": "قم بإنشاء أسئلة اختبار من أي نص معطى باستخدام الذكاء الاصطناعي.",
     "tab_content": "المحتوى",
     "tab_quiz_settings": "إعدادات الاختبار",
-    "ai_model_title": "نموذج الذكاء الاصطناعي",
-    "select_model_placeholder": "اختر نموذج",
     "your_content_title": "المحتوى الخاص بك",
     "content_placeholder": "صف الموضوع الذي تريد إنشاء أسئلة حوله...",
     "question_settings_title": "إعدادات السؤال",

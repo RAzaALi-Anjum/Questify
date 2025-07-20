@@ -37,8 +37,6 @@
   "app_subtitle": "Genera preguntas de quiz desde cualquier texto usando IA.",
   "tab_content": "Contenido",
   "tab_quiz_settings": "Ajustes del Quiz",
-  "ai_model_title": "Modelo IA",
-  "select_model_placeholder": "Seleccionar modelo",
   "your_content_title": "Tu Contenido",
   "content_placeholder": "Describe el tema sobre el que quieres generar preguntas...",
   "question_settings_title": "Ajustes de Preguntas",

@@ -64,7 +64,7 @@ export async function POST(req: Request) {
             minCorrectAnswers = 1,
             maxCorrectAnswers = 1,
             output,
-            model = "gemini-2.0-flash", // Default to Gemini 2.0 Flash
+            model = "deepseek-chat", // Default to DeepSeek
         }: GenerateQuestionsParams = await req.json();
         console.log("🚀 ~ POST ~ correctAnswersCount:", correctAnswersCount);
 

@@ -37,8 +37,6 @@
     "app_subtitle": "AIを使用して、あらゆるテキストからクイズの問題を生成します。",
     "tab_content": "コンテンツ",
     "tab_quiz_settings": "クイズの設定",
-    "ai_model_title": "AIモデル",
-    "select_model_placeholder": "モデルを選択",
     "your_content_title": "あなたのコンテンツ",
     "content_placeholder": "質問を生成したいトピックを説明してください...",
     "question_settings_title": "質問の設定",
