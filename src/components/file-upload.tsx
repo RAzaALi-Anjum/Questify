@@ -12,12 +12,14 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/$
 interface FileUploadProps {
     onFileContent: (content: string) => void;
     dictionary: any; // Added dictionary prop
+    fileName: string | null;
+    setFileName: (name: string | null) => void;
 }
 
-export function FileUpload({ onFileContent, dictionary }: FileUploadProps) {
+export function FileUpload({ onFileContent, dictionary, fileName, setFileName }: FileUploadProps) {
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
-    const [fileName, setFileName] = useState<string | null>(null);
+    // Remove local fileName state
 
     const extractPDFText = async (file: File): Promise<string> => {
         const arrayBuffer = await file.arrayBuffer();
@@ -44,7 +46,7 @@ export function FileUpload({ onFileContent, dictionary }: FileUploadProps) {
 
             setError(null);
             setLoading(true);
-            setFileName(file.name);
+            setFileName(file.name); // Use parent state
 
             if (file.type === "application/pdf") {
                 const text = await extractPDFText(file);
@@ -67,7 +69,7 @@ export function FileUpload({ onFileContent, dictionary }: FileUploadProps) {
 
     return (
         <div className="w-full">
-            <label className="block text-base font-bold mb-2 text-blue-700 dark:text-blue-200">
+            <label className="block text-base font-bold mb-2 text-white">
                 {dictionary?.fileUpload?.title || "Upload File (PDF or Text)"}
             </label>
 

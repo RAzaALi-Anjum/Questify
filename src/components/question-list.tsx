@@ -974,7 +974,7 @@ export function QuestionList({
                                         <div
                                             className={`rounded-lg p-4 border text-base font-bold mt-2 ${shortAnswerDetails[actualIndex].score !== null && shortAnswerDetails[actualIndex].score >= 75
     ? 'border-green-400 bg-green-50 dark:border-green-700 dark:bg-green-900/20 text-green-700 dark:text-green-200'
-    : shortAnswerDetails[actualIndex].score !== null && shortAnswerDetails[actualIndex].score >= 50
+                                                    : shortAnswerDetails[actualIndex].score !== null && shortAnswerDetails[actualIndex].score >= 50
     ? 'border-yellow-400 bg-yellow-50 dark:border-yellow-700 dark:bg-yellow-900/20 text-yellow-700 dark:text-yellow-200'
     : 'border-red-400 bg-red-50 dark:border-red-700 dark:bg-red-900/20 text-red-700 dark:text-red-200'}`}
                                         >

@@ -1,5 +1,10 @@
 "use client";
 import { useEffect, useState } from "react";
+import { UserCircle, Zap } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { Home } from "lucide-react";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 export default function UserUsage({ refresh }: { refresh?: number }) {
   const [usage, setUsage] = useState<null | {
@@ -11,6 +16,8 @@ export default function UserUsage({ refresh }: { refresh?: number }) {
   }>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
     const token = localStorage.getItem("authToken");
@@ -37,18 +44,29 @@ export default function UserUsage({ refresh }: { refresh?: number }) {
   if (error) return <div className="text-red-600">{error}</div>;
   if (!usage) return null;
 
+  // Determine if we are on the main screen (e.g., '/en' or '/[lang]')
+  const isMainScreen = /^\/[a-z]{2}$/.test(pathname || "");
+
   return (
-    <div className="mb-4 p-4 rounded bg-gray-100 dark:bg-gray-800 flex flex-col sm:flex-row sm:items-center sm:justify-between">
-      <div>
-        <div className="font-semibold">Welcome, {usage.name}</div>
-        <div className="text-sm text-gray-500">{usage.email}</div>
-      </div>
-      <div className="mt-2 sm:mt-0 flex items-center gap-4">
-        <span className="px-3 py-1 rounded-full bg-blue-200 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
-          {usage.subscriptionStatus === "paid"
-            ? "Paid (Unlimited)"
-            : `Free: ${usage.remainingTries} tries left`}
-        </span>
+    <div className="relative flex items-center mb-6 gap-3 w-full">
+      <Link
+        href="/"
+        className="px-3 py-2 rounded-lg font-semibold text-white underline ml-0"
+        style={{ marginRight: 'auto' }}
+      >
+        Home
+      </Link>
+      <div className="absolute left-1/2 transform -translate-x-1/2 top-4">
+        {isMainScreen && (
+          <div className="pointer-events-none select-none px-8 py-4 rounded-full bg-gray-100 dark:bg-gray-800 shadow text-gray-900 dark:text-white text-xl font-bold flex items-center gap-3 border border-gray-300 dark:border-gray-700">
+            <Zap className="w-7 h-7 text-blue-600 dark:text-blue-300" />
+            <span>
+              {usage && usage.subscriptionStatus === "paid"
+                ? "Paid (Unlimited)"
+                : `Free: ${usage ? usage.remainingTries : "..."} tries left`}
+            </span>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -8,7 +8,7 @@ import { decodeQuiz } from "@/utils/share";
 import { shuffleArray, shuffleMultipleChoiceOptions } from "@/utils/array";
 // import { useObject } from 'ai/react'; // Assuming useObject is from Vercel AI SDK - Commented out as it's causing an error
 import Link from 'next/link'; // Added import for Link
-import UserUsage from "@/components/UserUsage";
+// Remove import UserUsage from "@/components/UserUsage";
 
 // UI Components
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
@@ -38,6 +38,7 @@ import { Submit } from "@/components/submit";
 import { ThemedCard } from "@/components/themed-card";
 import { ThemedSectionTitle } from "@/components/themed-section-title";
 import RequireAuth from "@/components/RequireAuth";
+import AuthButton from "@/components/auth-button";
 
 
 // Separate component for quiz content
@@ -121,6 +122,7 @@ function QuizContent({ setUsageRefresh }: { setUsageRefresh: (fn: (r: number) =>
   const { toast } = useToast();
   const router = useRouter();
   const [activeTab, setActiveTab] = useState<'content' | 'settings'>('content');
+  const [fileName, setFileName] = useState<string | null>(null);
 
   const {
     isLoading,
@@ -295,8 +297,8 @@ function QuizContent({ setUsageRefresh }: { setUsageRefresh: (fn: (r: number) =>
     return (
       <main className="min-h-screen flex flex-col items-center justify-center p-8">
         <div className="max-w-md w-full bg-white dark:bg-gray-900 rounded-2xl shadow-2xl p-8 text-center border-2 border-blue-200 dark:border-blue-800">
-          <h2 className="text-3xl font-extrabold mb-4 text-blue-700 dark:text-blue-300">Upgrade Your Access</h2>
-          <p className="mb-8 text-blue-700 dark:text-blue-200 font-bold">Choose a plan to unlock unlimited AI usage and premium features.</p>
+          <h2 className="text-3xl font-black mb-4 text-white drop-shadow-lg">Upgrade Your Access</h2>
+          <p className="mb-8 text-lg text-white font-black drop-shadow-lg">Choose a plan to unlock unlimited AI usage and premium features.</p>
           <div className="grid grid-cols-1 gap-6">
             <div
               className="rounded-xl p-6 bg-gradient-to-br from-blue-100 to-blue-300 dark:from-blue-900 dark:to-blue-700 shadow-lg transform transition-transform hover:scale-105 cursor-pointer"
@@ -362,55 +364,46 @@ function QuizContent({ setUsageRefresh }: { setUsageRefresh: (fn: (r: number) =>
           <AIDisclaimer />
           <div className="text-center mb-12">
               <div className="inline-block relative">
-                  <h1 className="text-3xl font-extrabold mb-4 text-blue-700 dark:text-blue-300">Questify</h1>
+                  <h1 className="text-5xl font-extrabold mb-6 text-white drop-shadow-lg">Questify</h1>
                   <div className="absolute bottom-1 left-0 h-4 w-full bg-[hsl(var(--themed-yellow))] opacity-30 -z-0 rounded-full"></div>
               </div>
-              <p className="mb-4 text-gray-700 dark:text-gray-300">Generate quizzes from your notes, lectures, or documents. Free users get 5 tries.</p>
-              <div className="text-gray-500 text-sm mt-8">Upgrade to a paid plan for unlimited access.</div>
+              <p className="mb-6 text-lg text-white/90 drop-shadow-sm">Generate quizzes from your notes, lectures, or documents. Free users get 5 tries.</p>
+              <div className="text-white/70 text-base mt-8">Upgrade to a paid plan for unlimited access.</div>
           </div>
           <div className="mb-8">
-              <div className="flex rounded-full p-1 bg-gray-100 dark:bg-gray-800/50 backdrop-blur-sm shadow-inner mb-6">
+              <div className="flex rounded-full p-1 bg-gray-900/80 shadow-inner mb-6">
                   <button
                       onClick={() => setActiveTab("content")}
-                      className={`flex-1 py-2.5 px-4 rounded-full text-sm font-medium transition-all ${
+                      className={`flex-1 py-2.5 px-4 rounded-full text-base font-semibold transition-all ${
                           activeTab === "content"
-                              ? "bg-white dark:bg-gray-700 shadow-sm text-gray-900 dark:text-gray-100"
-                              : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200"
+                              ? "bg-white text-gray-900 shadow-sm"
+                              : "text-gray-600 hover:text-gray-900"
                       }`}
                   >
                       <span className="flex items-center justify-center gap-2">
-                          <BookOpen className="h-4 w-4" />
-                          <span>{dictionary.tab_content}</span>
+                          <BookOpen className="h-5 w-5 text-white" />
+                          <span className="text-white">{dictionary.tab_content}</span>
                       </span>
                   </button>
                   <button
                       onClick={() => setActiveTab("settings")}
-                      className={`flex-1 py-2.5 px-4 rounded-full text-sm font-medium transition-all ${
+                      className={`flex-1 py-2.5 px-4 rounded-full text-base font-semibold transition-all ${
                           activeTab === "settings"
-                              ? "bg-white dark:bg-gray-700 shadow-sm text-gray-900 dark:text-gray-100"
-                              : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200"
+                              ? "bg-white text-gray-900 shadow-sm"
+                              : "text-gray-600 hover:text-gray-900"
                       }`}
                   >
                       <span className="flex items-center justify-center gap-2">
-                          <Wand2 className="h-4 w-4" />
-                          <span>{dictionary.tab_quiz_settings}</span>
+                          <Wand2 className="h-5 w-5 text-white" />
+                          <span className="text-white">{dictionary.tab_quiz_settings}</span>
                       </span>
                   </button>
               </div>
 
               {activeTab === "content" && (
-                  <ThemedCard className="mb-6">
-                      {/* Remove ThemedSectionTitle and Select for AI model selection */}
-                      <ThemedSectionTitle>
-                          <span className="flex items-center gap-2 text-blue-700 dark:text-blue-200 font-bold">
-                              <Leaf className="h-5 w-5 text-[hsl(var(--themed-green))]" />
-                              {dictionary.your_content_title}
-                          </span>
-                      </ThemedSectionTitle>
-                      <FileUpload
-                          onFileContent={setFileContent}
-                          dictionary={dictionary}
-                      />
+                  <div className="p-8 rounded-2xl bg-gray-900/80 text-white shadow-xl">
+                      <h2 className="text-2xl font-bold mb-4 text-white">{dictionary.your_content_title}</h2>
+                      <FileUpload onFileContent={setFileContent} dictionary={dictionary} fileName={fileName} setFileName={setFileName} />
                       <div className="mt-6">
                           <ExpandedTextarea
                               value={input}
@@ -418,17 +411,12 @@ function QuizContent({ setUsageRefresh }: { setUsageRefresh: (fn: (r: number) =>
                               placeholder={dictionary.content_placeholder}
                           />
                       </div>
-                  </ThemedCard>
+                  </div>
               )}
 
               {activeTab === "settings" && (
-                  <ThemedCard className="mb-6">
-                      <ThemedSectionTitle>
-                          <span className="flex items-center gap-2 text-blue-700 dark:text-blue-200 font-bold">
-                              <Lightbulb className="h-5 w-5 text-[hsl(var(--themed-yellow))]" />
-                              {dictionary.question_settings_title}
-                          </span>
-                      </ThemedSectionTitle>
+                  <div className="p-8 rounded-2xl bg-gray-900/80 text-white shadow-xl">
+                      <h2 className="text-2xl font-bold mb-4 text-white">{dictionary.question_settings_title}</h2>
 
                       <div className="space-y-6">
                           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -595,7 +583,7 @@ function QuizContent({ setUsageRefresh }: { setUsageRefresh: (fn: (r: number) =>
                               </div>
                           )}
                       </div>
-                  </ThemedCard>
+                  </div>
               )}
           </div>{" "}
           {/* This closes the div with className="mb-8" */}
@@ -688,11 +676,11 @@ function QuizContent({ setUsageRefresh }: { setUsageRefresh: (fn: (r: number) =>
 export default function Page() {
     const [usageRefresh, setUsageRefresh] = useState(0);
     return (
-        <RequireAuth>
-            <UserUsage refresh={usageRefresh} />
-            <Suspense fallback={<LoadingState />}> {/* Removed text prop if LoadingState doesn't accept it */}
+        <>
+            {/* <AuthButton /> removed to prevent duplicate profile icon */}
+            <RequireAuth>
                 <QuizContent setUsageRefresh={setUsageRefresh} />
-            </Suspense>
-        </RequireAuth>
+            </RequireAuth>
+        </>
     );
 }

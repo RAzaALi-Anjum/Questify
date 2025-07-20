@@ -11,6 +11,8 @@ import Link from "next/link";
 import LanguageSwitcher from "@/components/language-switcher";
 import { Locale } from "@/i18n.config";
 import { getDictionary } from "./dictionaries";
+import UserUsageWrapper from '@/components/UserUsageWrapper';
+import { i18n, Locale } from '@/i18n.config';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -84,10 +86,11 @@ export default async function RootLayout({
   const awaitedParams = await params;
   const session = await auth(); 
   const dictionary = await getDictionary(awaitedParams.lang); 
+  const currentLocale = awaitedParams.lang;
 
   return (
       <SessionProvider session={session}>
-          <html lang={awaitedParams.lang} suppressHydrationWarning>
+          <html lang={currentLocale} suppressHydrationWarning>
               <body
                   className={`${geistSans.variable} ${geistMono.variable} antialiased`}
               >
@@ -96,20 +99,9 @@ export default async function RootLayout({
                       defaultTheme="system"
                       enableSystem
                   >
-                      <header className="px-4 sm:px-8 mx-auto max-w-4xl border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-                          <div className="flex h-14 max-w-screen-2xl items-center justify-between">
-                              <div className="flex items-center gap-2">
-                                  <span className="font-semibold text-sm">
-                                      Questify
-                                  </span>
-                              </div>
-                              <div className="flex items-center gap-4">
-                                  <LanguageSwitcher dictionary={dictionary.languageSwitcher} currentLocale={awaitedParams.lang} />
-                                  <AuthButton />
-                              </div>
-                          </div>
-                      </header>
+                    <UserUsageWrapper dictionary={dictionary} currentLocale={currentLocale}>
                       {children}
+                    </UserUsageWrapper>
                   </ThemeProvider>
                   <Toaster />
               </body>
