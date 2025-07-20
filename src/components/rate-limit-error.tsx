@@ -4,15 +4,23 @@ import { signIn } from 'next-auth/react';
 import { Button } from '@/components/ui/button';
 import { LogIn } from 'lucide-react';
 
-interface RateLimitErrorProps {
-    error: Error;
-    session: Session | null;
-    handlePurchaseCredits: () => void;
-    isCheckoutLoading: boolean;
-    priceString?: string | null;
-    dictionary: any;
-}
+type Props = {
+  error: Error;
+  session?: any;
+  handlePurchaseCredits?: () => void;
+  isCheckoutLoading?: boolean;
+  priceString?: string | null;
+  dictionary?: any;
+};
 
-export function RateLimitError({ error }: { error: Error }) {
-    return <>{error.message}</>;
+export default function RateLimitError({
+  error,
+  session,
+  handlePurchaseCredits,
+  isCheckoutLoading,
+  priceString,
+  dictionary
+}: Props) {
+  // use them if needed...
+  return <>{error.message}</>;
 }
