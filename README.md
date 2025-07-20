@@ -1,4 +1,4 @@
-# Text2Question - AI-Powered Quiz Generator
+# Questify - AI-Powered Quiz Generator
 
 Text2Question is an open-source application that automatically generates quizzes from textual content using AI. It supports multiple question types and provides an interactive interface for taking and grading quizzes.
 
